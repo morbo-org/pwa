@@ -1,13 +1,12 @@
 import eslint from "@eslint/js";
 import pluginStylistic from "@stylistic/eslint-plugin";
-import pluginImport from "eslint-plugin-import";
-import pluginJsxA11y from "eslint-plugin-jsx-a11y";
-import pluginReact from "eslint-plugin-react";
-import pluginReactHooks from "eslint-plugin-react-hooks";
+import pluginImportX from "eslint-plugin-import-x";
+import pluginVue from "eslint-plugin-vue";
 import pluginTypeScript from "typescript-eslint";
+import parserVue from "vue-eslint-parser";
 
 const sources = {
-  files: ["**/*.js", "**/*.ts", "**/*.tsx"],
+  files: ["**/*.js", "**/*.ts", "**/*.vue"],
   ignores: ["dist/*", "node_modules/*"],
 };
 
@@ -21,13 +20,23 @@ export default [
         ...pluginTypeScript.configs.stylisticTypeChecked,
       ],
       rules: {
-        "sort-imports": ["warn", { ignoreDeclarationSort: true }],
+        "max-len": ["error", { code: 120 }],
+        "sort-imports": ["error", { ignoreDeclarationSort: true }],
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-expressions": ["error", {
+          allowShortCircuit: true,
+        }],
+        "@typescript-eslint/restrict-template-expressions": ["error", {
+          allowBoolean: true,
+        }],
       },
       languageOptions: {
+        parser: parserVue,
         parserOptions: {
+          parser: pluginTypeScript.parser,
           project: true,
           tsconfigRootDir: import.meta.dirname,
+          extraFileExtensions: [".vue"],
         },
       },
     },
@@ -47,51 +56,56 @@ export default [
         quotes: "double",
         semi: true,
       }).rules,
-      "object-curly-newline": ["warn", { multiline: true, consistent: true }],
-      "object-property-newline": ["warn", { allowAllPropertiesOnSameLine: true }],
+      "object-curly-newline": ["error", { multiline: true, consistent: true }],
+      "object-property-newline": ["error", { allowAllPropertiesOnSameLine: true }],
     },
   },
   {
     ...sources,
     plugins: {
-      import: pluginImport,
+      "import-x": pluginImportX,
     },
     rules: {
-      ...pluginImport.configs.recommended.rules,
-      ...pluginImport.configs.typescript.rules,
-      "import/order": [
-        "warn", {
+      ...pluginImportX.configs.recommended.rules,
+      ...pluginImportX.configs.typescript.rules,
+      "import-x/order": [
+        "error", {
           "alphabetize": {
             order: "asc",
             caseInsensitive: true,
           },
           "newlines-between": "always",
+          "pathGroups": [
+            {
+              pattern: "@/components/*",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "@/components/buttons/*",
+              group: "internal",
+              position: "before",
+            },
+          ],
         },
       ],
-      "import/newline-after-import": "warn",
+      "import-x/newline-after-import": "error",
     },
     settings: {
-      "import/resolver": {
+      "import-x/resolver": {
         typescript: true,
         node: true,
       },
     },
   },
-  {
-    files: ["**/*.tsx"],
-    plugins: {
-      "react": pluginReact,
-      "react-hooks": pluginReactHooks,
-      "jsx-a11y": pluginJsxA11y,
+  ...[
+    ...pluginVue.configs["flat/recommended"],
+    {
+      rules: {
+        "vue/max-attributes-per-line": "off",
+        "vue/multi-word-component-names": "off",
+        "vue/singleline-html-element-content-newline": "off",
+      },
     },
-    rules: {
-      ...pluginReact.configs.recommended.rules,
-      ...pluginReact.configs["jsx-runtime"].rules,
-      ...pluginReactHooks.configs.recommended.rules,
-      ...pluginJsxA11y.configs.strict.rules,
-    },
-    settings: {
-      react: { version: "detect" },
-    },
-  },
+  ],
 ];

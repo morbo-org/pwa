@@ -5,7 +5,7 @@ WORKDIR /build/src
 RUN --mount=type=cache,target=/root/.npm \
     --mount=type=bind,target=.,rw \
     npm install && \
-    npm run build -- -o /build/output
+    npm run build -- --outDir /build/output
 
 FROM docker.io/nginx:1.27.2-alpine-slim
 

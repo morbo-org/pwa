@@ -1,6 +1,6 @@
 import { setCacheNameDetails } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
-import { precacheAndRoute } from "workbox-precaching";
+import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 import { CacheFirst } from "workbox-strategies";
 
@@ -21,17 +21,17 @@ setCacheNameDetails({
   precache: "precache",
 });
 
+cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
 
 registerRoute(
-  /\/assets\//,
+  /\/assets\/pwa\//,
   new CacheFirst({
-    cacheName: "assets",
+    cacheName: "pwa",
     plugins: [
       // @ts-expect-error Upstream issue: https://github.com/GoogleChrome/workbox/issues/3141
       new ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 7,
-        maxEntries: NUMBER_OF_MANIFEST_ASSETS * 3,
         purgeOnQuotaError: true,
       }),
     ],
