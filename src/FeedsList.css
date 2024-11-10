@@ -1,0 +1,5 @@
+ul#feedsList {
+  list-style-type: none;
+  margin: 0;
+  padding: var(--content-padding);
+}

@@ -1,0 +1,28 @@
+<svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" fill="none">
+  <g class="frame-children">
+    <path d="M10.393 17.491h3.214" style="fill: none;" class="fills"/>
+    <g stroke-linecap="round" stroke-linejoin="round" class="strokes">
+      <path
+        d="M10.393 17.491h3.214"
+        style="fill: none; stroke-width: 2; stroke-opacity: 1;"
+        class="stroke-shape"
+      />
+    </g>
+    <path d="M7.714 11.996h8.572" style="fill: none;" class="fills"/>
+    <g stroke-linecap="round" stroke-linejoin="round" class="strokes">
+      <path
+        d="M7.714 11.996h8.572"
+        style="fill: none; stroke-width: 2; stroke-opacity: 1;"
+        class="stroke-shape"
+      />
+    </g>
+    <path d="M4.5 6.5h15" style="fill: none;" class="fills"/>
+    <g stroke-linecap="round" stroke-linejoin="round" class="strokes">
+      <path
+        d="M4.5 6.5h15"
+        style="fill: none; stroke-width: 2; stroke-opacity: 1;"
+        class="stroke-shape"
+      />
+    </g>
+  </g>
+</svg>

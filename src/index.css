@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Atkinson Hyperlegible Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../assets/resources/fonts/atkinson_hyperlegible_pro_regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url("../assets/resources/fonts/atkinson_hyperlegible_pro_bold.woff2") format("woff2");
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}

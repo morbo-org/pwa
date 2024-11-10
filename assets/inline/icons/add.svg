@@ -1,0 +1,20 @@
+<svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" fill="none">
+  <g class="frame-children">
+    <path d="M4 12h16" style="fill: none;" class="fills"/>
+    <g stroke-linecap="round" stroke-linejoin="round" class="strokes">
+      <path
+        d="M4 12h16"
+        style="fill: none; stroke-width: 2; stroke-opacity: 1;"
+        class="stroke-shape"
+      />
+    </g>
+    <path d="M12 4v16" style="fill: none;" class="fills"/>
+    <g stroke-linecap="round" stroke-linejoin="round" class="strokes">
+      <path
+        d="M12 4v16"
+        style="fill: none; stroke-width: 2; stroke-opacity: 1;"
+        class="stroke-shape"
+      />
+    </g>
+  </g>
+</svg>
