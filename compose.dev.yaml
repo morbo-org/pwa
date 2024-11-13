@@ -6,15 +6,15 @@ services:
       dockerfile: Dockerfile.dev
     develop:
       watch:
-        - path: pwa/src
+        - path: src
           target: /pwa/src
           action: sync
-        - path: pwa/index.html
+        - path: index.html
           target: /pwa/index.html
           action: sync
-        - path: pwa/package.json
+        - path: package.json
           action: rebuild
-        - path: pwa/vite.config.ts
+        - path: vite.config.ts
           action: rebuild
     networks:
       - traefik
