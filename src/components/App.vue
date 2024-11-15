@@ -27,6 +27,12 @@ import Header from "@/components/Header.vue";
   src: url("/assets/fonts/atkinson_hyperlegible_pro_bold.woff2") format("woff2");
 }
 
+* {
+  font-family: "Atkinson Hyperlegible Pro", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
 html, body {
   margin: 0;
   padding: 0;

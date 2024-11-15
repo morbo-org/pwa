@@ -39,9 +39,6 @@ ul#feeds > li {
 
 ul#feeds > li > .label {
   font-size: 17px;
-  font-family: "Atkinson Hyperlegible Pro", sans-serif;
-  font-style: normal;
-  font-weight: 400;
   flex-grow: 1;
   margin: 0 10px;
   color: var(--color-light-icons-and-text);
@@ -58,9 +55,6 @@ ul#feeds > li > .counter {
 
 ul#feeds > li > .counter > .number {
   font-size: 12px;
-  font-family: "Atkinson Hyperlegible Pro", sans-serif;
-  font-style: normal;
-  font-weight: 400;
   color: var(--color-light-icons-and-text);
 }
 </style>

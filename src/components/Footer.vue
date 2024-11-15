@@ -27,9 +27,6 @@ import IconSettings from "@/components/icons/IconSettings.vue";
 
 #footer > span.update-status {
   font-size: 13px;
-  font-family: "Atkinson Hyperlegible Pro", sans-serif;
-  font-style: normal;
-  font-weight: 400;
   color: var(--color-light-update-status);
 }
 </style>

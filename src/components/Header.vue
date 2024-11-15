@@ -23,8 +23,6 @@ import IconListFilter from "@/components/icons/IconListFilter.vue";
 
 #header > span.location {
   font-size: 19px;
-  font-family: "Atkinson Hyperlegible Pro", sans-serif;
-  font-style: normal;
   font-weight: 700;
   color: var(--color-light-icons-and-text);
 }
