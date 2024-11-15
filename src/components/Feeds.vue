@@ -6,9 +6,9 @@ import { state } from "@/state";
 </script>
 
 <template>
-  <ul id="feeds-list">
+  <ul id="feeds">
     <template v-for="feed of state.feeds.value" :key="feed.id">
-      <li class="feed-item">
+      <li>
         <IconFeed v-if="feed.type === 'feed'" />
         <IconDirectory v-else-if="feed.type === 'directory'" />
         <span class="label">{{ feed.label }}</span>
@@ -22,14 +22,14 @@ import { state } from "@/state";
   </ul>
 </template>
 
-<style scoped>
-ul#feeds-list {
+<style>
+ul#feeds {
   list-style-type: none;
   margin: 0;
   padding: var(--content-padding);
 }
 
-li.feed-item {
+ul#feeds > li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -37,7 +37,7 @@ li.feed-item {
   height: var(--bar-height);
 }
 
-span.label {
+ul#feeds > li > .label {
   font-size: 17px;
   font-family: "Atkinson Hyperlegible Pro", sans-serif;
   font-style: normal;
@@ -47,7 +47,7 @@ span.label {
   color: var(--color-light-icons-and-text);
 }
 
-div.counter {
+ul#feeds > li > .counter {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -56,7 +56,7 @@ div.counter {
   border-radius: 10px;
 }
 
-div.counter > .number {
+ul#feeds > li > .counter > .number {
   font-size: 12px;
   font-family: "Atkinson Hyperlegible Pro", sans-serif;
   font-style: normal;
