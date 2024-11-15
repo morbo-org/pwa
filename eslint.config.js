@@ -86,6 +86,11 @@ export default [
               group: "internal",
               position: "before",
             },
+            {
+              pattern: "@/components/icons/*",
+              group: "internal",
+              position: "before",
+            },
           ],
         },
       ],
