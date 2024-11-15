@@ -1,22 +1,11 @@
+<script setup lang="ts">
+import IconListFilter from "@/components/icons/IconListFilter.vue";
+</script>
+
 <template>
   <div id="header">
     <span class="location">Feeds</span>
-    <svg class="list-filter-icon" width="24" xmlns="http://www.w3.org/2000/svg" height="24" fill="none">
-      <g class="frame-children">
-        <path d="M10.393 17.491h3.214" class="fills" />
-        <g stroke-linecap="round" stroke-linejoin="round" class="strokes">
-          <path d="M10.393 17.491h3.214" class="stroke-shape" />
-        </g>
-        <path d="M7.714 11.996h8.572" class="fills" />
-        <g stroke-linecap="round" stroke-linejoin="round" class="strokes">
-          <path d="M7.714 11.996h8.572" class="stroke-shape" />
-        </g>
-        <path d="M4.5 6.5h15" class="fills" />
-        <g stroke-linecap="round" stroke-linejoin="round" class="strokes">
-          <path d="M4.5 6.5h15" class="stroke-shape" />
-        </g>
-      </g>
-    </svg>
+    <IconListFilter />
   </div>
 </template>
 
@@ -38,9 +27,5 @@
   font-style: normal;
   font-weight: 700;
   color: var(--color-light-icons-and-text);
-}
-
-#header > svg.list-filter-icon {
-  stroke: var(--color-light-icons-and-text);
 }
 </style>
