@@ -29,8 +29,6 @@ import Header from "@/components/Header.vue";
 
 * {
   font-family: "Atkinson Hyperlegible Pro", sans-serif;
-  font-style: normal;
-  font-weight: 400;
 }
 
 html, body {
