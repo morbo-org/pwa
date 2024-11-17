@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import ButtonAdd from "@/components/buttons/ButtonAdd.vue";
-
-import IconSettings from "@/components/icons/IconSettings.vue";
+import ButtonSettings from "@/components/buttons/ButtonSettings.vue";
 </script>
 
 <template>
   <div id="footer">
-    <IconSettings />
+    <ButtonSettings />
     <span class="update-status">
       Updated 6 hours ago
     </span>
