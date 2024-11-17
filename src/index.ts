@@ -1,5 +1,7 @@
 import { createApp } from "vue";
 
+import { stateStore } from "./store";
+
 import App from "@/components/App.vue";
 
 if ("storage" in navigator && "persist" in navigator.storage) {
@@ -16,3 +18,5 @@ if ("serviceWorker" in navigator) {
 }
 
 createApp(App).mount("#app");
+
+void stateStore.ready;
