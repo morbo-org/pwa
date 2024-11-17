@@ -48,4 +48,32 @@ defineExpose({
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 20px;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-input > input {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  height: 2rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.form-error {
+  color: red;
+}
 </style>
