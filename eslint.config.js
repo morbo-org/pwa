@@ -5,69 +5,31 @@ import pluginVue from "eslint-plugin-vue";
 import pluginTypeScript from "typescript-eslint";
 import parserVue from "vue-eslint-parser";
 
-const sources = {
-  files: ["**/*.js", "**/*.ts", "**/*.vue"],
-  ignores: ["dist/*", "node_modules/*"],
-};
-
+const extraFileExtensions = [".vue"];
 export default [
-  ...pluginTypeScript.config(
-    {
-      ...sources,
-      extends: [
-        eslint.configs.recommended,
-        ...pluginTypeScript.configs.strictTypeChecked,
-        ...pluginTypeScript.configs.stylisticTypeChecked,
-      ],
-      rules: {
-        "max-len": ["error", { code: 120 }],
-        "sort-imports": ["error", { ignoreDeclarationSort: true }],
-        "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-unused-expressions": ["error", {
-          allowShortCircuit: true,
-        }],
-        "@typescript-eslint/restrict-template-expressions": ["error", {
-          allowBoolean: true,
-        }],
-      },
-      languageOptions: {
-        parser: parserVue,
-        parserOptions: {
-          parser: pluginTypeScript.parser,
-          project: true,
-          tsconfigRootDir: import.meta.dirname,
-          extraFileExtensions: [".vue"],
-        },
-      },
-    },
-    {
-      files: ["**/*.js"],
-      ...pluginTypeScript.configs.disableTypeChecked,
-    },
-  ),
+  eslint.configs.recommended,
+  pluginStylistic.configs.customize({
+    braceStyle: "1tbs",
+    quotes: "double",
+    semi: true,
+  }),
+  pluginImportX.flatConfigs.recommended,
+  pluginImportX.flatConfigs.typescript,
+  ...pluginVue.configs["flat/recommended"],
+  ...pluginTypeScript.configs.strictTypeChecked,
   {
-    ...sources,
-    plugins: {
-      "@stylistic": pluginStylistic,
-    },
     rules: {
-      ...pluginStylistic.configs.customize({
-        braceStyle: "1tbs",
-        quotes: "double",
-        semi: true,
-      }).rules,
-      "object-curly-newline": ["error", { multiline: true, consistent: true }],
-      "object-property-newline": ["error", { allowAllPropertiesOnSameLine: true }],
-    },
-  },
-  {
-    ...sources,
-    plugins: {
-      "import-x": pluginImportX,
-    },
-    rules: {
-      ...pluginImportX.configs.recommended.rules,
-      ...pluginImportX.configs.typescript.rules,
+      "max-len": ["error", { code: 120 }],
+      "sort-imports": ["error", { ignoreDeclarationSort: true }],
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-unused-expressions": ["error", {
+        allowShortCircuit: true,
+      }],
+      "@typescript-eslint/restrict-template-expressions": ["error", {
+        allowBoolean: true,
+      }],
+      "import-x/newline-after-import": "error",
+      "import-x/no-named-as-default-member": "off",
       "import-x/order": [
         "error", {
           "alphabetize": {
@@ -94,23 +56,38 @@ export default [
           ],
         },
       ],
-      "import-x/newline-after-import": "error",
+      "object-curly-newline": ["error", { multiline: true, consistent: true }],
+      "object-property-newline": ["error", { allowAllPropertiesOnSameLine: true }],
+      "vue/max-attributes-per-line": "off",
+      "vue/multi-word-component-names": "off",
+      "vue/singleline-html-element-content-newline": "off",
     },
-    settings: {
-      "import-x/resolver": {
-        typescript: true,
-        node: true,
+  },
+  {
+    files: ["**/*.js"],
+    ...pluginTypeScript.configs.disableTypeChecked,
+  },
+  {
+    files: ["**/*.ts"],
+    languageOptions: {
+      parser: pluginTypeScript.parser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+        extraFileExtensions,
       },
     },
   },
-  ...[
-    ...pluginVue.configs["flat/recommended"],
-    {
-      rules: {
-        "vue/max-attributes-per-line": "off",
-        "vue/multi-word-component-names": "off",
-        "vue/singleline-html-element-content-newline": "off",
+  {
+    files: ["**/*.vue"],
+    languageOptions: {
+      parser: parserVue,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+        parser: pluginTypeScript.parser,
+        extraFileExtensions,
       },
     },
-  ],
+  },
 ];
