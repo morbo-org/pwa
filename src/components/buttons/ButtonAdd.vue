@@ -27,6 +27,8 @@ watch(modalOpen, () => {
     void nextTick(() => {
       feedUrlRef.value?.focus();
     });
+  } else {
+    feedUrl.value = "";
   }
 });
 </script>
