@@ -22,12 +22,8 @@ class Feeds {
     return shallowReactive(this);
   }
 
-  add() {
-    this.value = [...this.value, new Feed(
-      "Label",
-      Math.random() < 0.5 ? "feed" : "directory",
-      Math.floor(Math.random() * 121),
-    )];
+  add(label: string, type: FeedItemType, counter: number) {
+    this.value = [...this.value, new Feed(label, type, counter)];
   }
 }
 
