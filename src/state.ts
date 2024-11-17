@@ -1,4 +1,4 @@
-import { shallowReactive } from "vue";
+import { ref, shallowReactive } from "vue";
 
 type FeedItemType = "directory" | "feed";
 
@@ -33,6 +33,7 @@ class Feeds {
 
 class State {
   feeds = new Feeds();
+  apiUrl = ref("");
 
   * [Symbol.iterator]() {
     for (const property in this) {
