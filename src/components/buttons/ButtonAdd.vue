@@ -42,7 +42,7 @@ watch(modalOpen, () => {
       <h3>Add a feed</h3>
       <form @submit.prevent="submit">
         <div class="form-input">
-          <label for="url">URL:</label>
+          <label for="url">Feed URL:</label>
           <input
             id="url"
             ref="feed-url"
