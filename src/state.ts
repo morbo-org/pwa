@@ -33,6 +33,15 @@ class Feeds {
 
 class State {
   feeds = new Feeds();
+
+  * [Symbol.iterator]() {
+    for (const property in this) {
+      const ref = this[property as keyof this];
+      if (ref && typeof ref === "object" && "value" in ref) {
+        yield [ref, property] as const;
+      }
+    }
+  }
 }
 
 export const state = new State();
