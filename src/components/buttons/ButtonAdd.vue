@@ -26,7 +26,7 @@ async function submit() {
 
   let response: Response;
   try {
-    response = await fetch(state.apiUrl.value + "/feeds/", {
+    response = await fetch(state.apiUrl.value + "/feed/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
