@@ -53,21 +53,11 @@ async function submit() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     modal.value?.close();
   } else {
-    switch (response.status) {
-      case 400:
-        errorMessage.value = "Submit failed: sent a bad request.";
-        break;
-      case 401:
-        errorMessage.value = "Submit failed: invalid credentials.";
-        break;
-      case 404:
-        errorMessage.value = "Submit failed: couldn't reach the API server.";
-        break;
-      case 500:
-        errorMessage.value = "Submit failed: internal server error.";
-        break;
-      default:
-        errorMessage.value = "Submit failed: unexpected response.";
+    const message = await response.text();
+    if (message) {
+      errorMessage.value = `Submit failed: ${message}.`;
+    } else {
+      errorMessage.value = "Submit failed: unexpected response.";
     }
   }
 
