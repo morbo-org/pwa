@@ -96,7 +96,7 @@ class AuthStore {
 
 class StateStore {
   storeName = "state";
-  ready = this.init();
+  readyPromise = this.init();
 
   async init() {
     await this.loadState();

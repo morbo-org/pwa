@@ -19,4 +19,4 @@ if ("serviceWorker" in navigator) {
 
 createApp(App).mount("#app");
 
-void stateStore.ready;
+void stateStore.readyPromise;
