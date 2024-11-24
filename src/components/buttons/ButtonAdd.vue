@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref, useTemplateRef, watch } from "vue";
+import { nextTick, ref, useTemplateRef, watch } from "vue";
 
 import Modal from "@/components/Modal.vue";
 
@@ -8,7 +8,6 @@ import Button from "@/components/buttons/Button.vue";
 import IconAdd from "@/components/icons/IconAdd.vue";
 
 import { state } from "@/state";
-import { stateStore } from "@/store";
 
 const modalOpen = ref(false);
 const feedUrl = ref("");
