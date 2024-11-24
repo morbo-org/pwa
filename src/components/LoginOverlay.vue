@@ -87,7 +87,7 @@ onMounted(() => {
           {{ errorMessage }}
         </div>
         <div class="form-actions">
-          <Button class="text" type="submit">Submit</Button>
+          <Button class="text" type="submit" :disabled="isSubmitting">Submit</Button>
         </div>
       </form>
     </Overlay>
