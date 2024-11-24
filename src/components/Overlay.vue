@@ -25,6 +25,9 @@ defineEmits(["self"]);
 }
 
 .overlay-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -34,6 +37,12 @@ defineEmits(["self"]);
   overflow-y: auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 20px;
+}
+
+.overlay-content > header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0.25rem 0;
 }
 
 form {

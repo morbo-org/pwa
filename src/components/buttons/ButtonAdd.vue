@@ -82,7 +82,7 @@ watch(modalOpen, () => {
   </Button>
   <Teleport to="body">
     <Modal ref="modal" v-model="modalOpen">
-      <h3>Add a feed</h3>
+      <header>Add a feed</header>
       <form @submit.prevent="submit">
         <div class="form-input">
           <label for="url">Feed URL:</label>

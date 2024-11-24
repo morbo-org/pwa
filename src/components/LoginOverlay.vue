@@ -83,7 +83,7 @@ onMounted(() => {
   <template v-if="stateStore.ready.value">
     <slot v-if="state.isLoggedIn.value" />
     <Overlay v-else>
-      <h3>Log In</h3>
+      <header>Log In</header>
       <form @submit.prevent="submit">
         <div class="form-input">
           <label for="username">Username:</label>
