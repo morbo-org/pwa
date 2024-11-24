@@ -4,8 +4,8 @@ import { state } from "@/state";
 
 class Database {
   dbName = "morbo";
-  version = 1;
-  stores = ["state"];
+  version = 2;
+  stores = ["auth", "state"];
 
   async open() {
     return new Promise<IDBDatabase>((resolve, reject) => {
@@ -29,6 +29,70 @@ class Database {
 }
 
 const database = new Database();
+
+class AuthStore {
+  storeName = "auth";
+  sessionTokenKey = "sessionToken";
+
+  async putSessionToken(sessionToken: string) {
+    const db = await database.open();
+    return new Promise<void>((resolve, reject) => {
+      const transaction = db.transaction(this.storeName, "readwrite");
+      const store = transaction.objectStore(this.storeName);
+      const request = store.put(sessionToken, this.sessionTokenKey);
+
+      request.onsuccess = () => {
+        resolve();
+      };
+      request.onerror = () => {
+        reject(new Error(
+          request.error?.message ?? `[IndexedDB] [${this.storeName}] Failed to put the session token`,
+        ));
+      };
+    });
+  }
+
+  async getSessionToken() {
+    const db = await database.open();
+    return new Promise<string>((resolve, reject) => {
+      const transaction = db.transaction(this.storeName, "readonly");
+      const store = transaction.objectStore(this.storeName);
+      const request = store.get(this.sessionTokenKey);
+
+      request.onsuccess = () => {
+        const value: unknown = request.result;
+        if (value !== undefined && typeof value === "string") {
+          resolve(value);
+        } else {
+          resolve("");
+        }
+      };
+      request.onerror = () => {
+        reject(new Error(
+          request.error?.message ?? `[IndexedDB] [${this.storeName}] Failed to get the session token`,
+        ));
+      };
+    });
+  }
+
+  async deleteSessionToken() {
+    const db = await database.open();
+    return new Promise<void>((resolve, reject) => {
+      const transaction = db.transaction(this.storeName, "readwrite");
+      const store = transaction.objectStore(this.storeName);
+      const request = store.delete(this.sessionTokenKey);
+
+      request.onsuccess = () => {
+        resolve();
+      };
+      request.onerror = () => {
+        reject(new Error(
+          request.error?.message ?? `[IndexedDB] [${this.storeName}] Failed to delete the session token`,
+        ));
+      };
+    });
+  }
+}
 
 class StateStore {
   storeName = "state";
@@ -96,4 +160,5 @@ class StateStore {
   }
 }
 
+export const authStore = new AuthStore();
 export const stateStore = new StateStore();
