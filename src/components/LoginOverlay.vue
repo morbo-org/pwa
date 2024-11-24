@@ -8,7 +8,6 @@ import Button from "@/components/buttons/Button.vue";
 import { state } from "@/state";
 import { authStore, stateStore } from "@/store";
 
-const username = ref("");
 const password = ref("");
 const isSubmitting = ref(false);
 const errorMessage = ref("");
@@ -36,7 +35,7 @@ async function submit() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: username.value,
+        username: state.username.value,
         password: hashedPassword,
       }),
     });
@@ -88,7 +87,7 @@ onMounted(() => {
       <form @submit.prevent="submit">
         <div class="form-input">
           <label for="username">Username:</label>
-          <input id="username" v-model="username" type="text" required>
+          <input id="username" v-model="state.username.value" type="text" required>
         </div>
         <div class="form-input">
           <label for="password">Password:</label>

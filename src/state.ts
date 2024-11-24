@@ -29,6 +29,7 @@ class Feeds {
 
 class State {
   apiUrl = ref("");
+  username = ref("");
   isLoggedIn = ref(false);
 
   feeds = new Feeds();
