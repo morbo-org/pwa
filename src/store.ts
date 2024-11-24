@@ -34,6 +34,16 @@ class AuthStore {
   storeName = "auth";
   sessionTokenKey = "sessionToken";
 
+  async checkLoginStatus() {
+    try {
+      const sessionToken = await this.getSessionToken();
+      state.isLoggedIn.value = !!sessionToken;
+    } catch (error) {
+      console.error(error);
+      state.isLoggedIn.value = false;
+    }
+  }
+
   async putSessionToken(sessionToken: string) {
     const db = await database.open();
     return new Promise<void>((resolve, reject) => {

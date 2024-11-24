@@ -12,16 +12,6 @@ const password = ref("");
 const isSubmitting = ref(false);
 const errorMessage = ref("");
 
-async function checkLoginStatus() {
-  try {
-    const sessionToken = await authStore.getSessionToken();
-    state.isLoggedIn.value = !!sessionToken;
-  } catch (error) {
-    console.error(error);
-    state.isLoggedIn.value = false;
-  }
-}
-
 async function submit() {
   if (isSubmitting.value) return;
   isSubmitting.value = true;
@@ -58,7 +48,7 @@ async function submit() {
       }
     }
 
-    await checkLoginStatus();
+    await authStore.checkLoginStatus();
     if (!state.isLoggedIn.value) {
       errorMessage.value = "Login failed: no session token received.";
     }
@@ -75,7 +65,7 @@ async function submit() {
 }
 
 onMounted(() => {
-  void checkLoginStatus();
+  void authStore.checkLoginStatus();
 });
 </script>
 
