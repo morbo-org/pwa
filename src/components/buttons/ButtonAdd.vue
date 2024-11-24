@@ -74,10 +74,6 @@ watch(modalOpen, () => {
     errorMessage.value = "";
   }
 });
-
-onMounted(async () => {
-  await stateStore.ready;
-});
 </script>
 
 <template>
