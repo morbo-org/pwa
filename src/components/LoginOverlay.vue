@@ -61,6 +61,7 @@ async function submit() {
     }
   }
 
+  password.value = "";
   isSubmitting.value = false;
 }
 
