@@ -28,8 +28,10 @@ class Feeds {
 }
 
 class State {
-  feeds = new Feeds();
   apiUrl = ref("");
+  isLoggedIn = ref(false);
+
+  feeds = new Feeds();
 
   * [Symbol.iterator]() {
     for (const property in this) {
