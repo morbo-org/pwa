@@ -1,0 +1,106 @@
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
+
+import Overlay from "@/components/Overlay.vue";
+
+import Button from "@/components/buttons/Button.vue";
+
+import { state } from "@/state";
+import { authStore, stateStore } from "@/store";
+
+const username = ref("");
+const password = ref("");
+const isSubmitting = ref(false);
+const errorMessage = ref("");
+
+async function checkLoginStatus() {
+  try {
+    const sessionToken = await authStore.getSessionToken();
+    state.isLoggedIn.value = !!sessionToken;
+  } catch (error) {
+    console.error(error);
+    state.isLoggedIn.value = false;
+  }
+}
+
+async function submit() {
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
+  errorMessage.value = "";
+
+  const hashedPassword = btoa(password.value);
+
+  let response: Response;
+  try {
+    response = await fetch(state.apiUrl.value + "/session/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username.value,
+        password: hashedPassword,
+      }),
+    });
+  } catch {
+    errorMessage.value = "Submit failed: failed to reach the endpoint.";
+    isSubmitting.value = false;
+    return;
+  }
+
+  if (response.ok) {
+    {
+      let body: unknown;
+      try {
+        body = await response.json();
+      } catch {
+        errorMessage.value = "Submit failed: failed to parse the response.";
+      }
+      if (body && typeof body == "object" && "sessionToken" in body && typeof body.sessionToken == "string") {
+        await authStore.putSessionToken(body.sessionToken);
+      }
+    }
+
+    await checkLoginStatus();
+    if (!state.isLoggedIn.value) {
+      errorMessage.value = "Login failed: no session token received.";
+    }
+  } else {
+    const message = await response.text();
+    if (message) {
+      errorMessage.value = `Submit failed: ${message}.`;
+    } else {
+      errorMessage.value = "Submit failed: unexpected response.";
+    }
+  }
+
+  isSubmitting.value = false;
+}
+
+onMounted(() => {
+  void checkLoginStatus();
+});
+</script>
+
+<template>
+  <template v-if="stateStore.ready.value">
+    <slot v-if="state.isLoggedIn.value" />
+    <Overlay v-else>
+      <h3>Log In</h3>
+      <form @submit.prevent="submit">
+        <div class="form-input">
+          <label for="username">Username:</label>
+          <input id="username" v-model="username" type="text" required>
+        </div>
+        <div class="form-input">
+          <label for="password">Password:</label>
+          <input id="password" v-model="password" type="password" required>
+        </div>
+        <div v-if="errorMessage" class="form-error">
+          {{ errorMessage }}
+        </div>
+        <div class="form-actions">
+          <Button class="text" type="submit">Submit</Button>
+        </div>
+      </form>
+    </Overlay>
+  </template>
+</template>

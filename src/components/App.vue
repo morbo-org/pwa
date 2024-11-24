@@ -2,12 +2,15 @@
 import Content from "@/components/Content.vue";
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue";
+import LoginOverlay from "@/components/LoginOverlay.vue";
 </script>
 
 <template>
-  <Header />
-  <Content />
-  <Footer />
+  <LoginOverlay>
+    <Header />
+    <Content />
+    <Footer />
+  </LoginOverlay>
 </template>
 
 <style>
