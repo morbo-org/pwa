@@ -77,6 +77,10 @@ onMounted(() => {
       <header>Log In</header>
       <form @submit.prevent="submit">
         <div class="form-input">
+          <label for="url">API URL:</label>
+          <input v-model="state.apiUrl.value" type="url" placeholder="https://api.morbo.paveloom.dev">
+        </div>
+        <div class="form-input">
           <label for="username">Username:</label>
           <input id="username" v-model="state.username.value" type="text" required>
         </div>
