@@ -1,4 +1,4 @@
-import { watch } from "vue";
+import { ref, watch } from "vue";
 
 import { state } from "@/state";
 
@@ -97,6 +97,7 @@ class AuthStore {
 class StateStore {
   storeName = "state";
   readyPromise = this.init();
+  ready = ref(false);
 
   async init() {
     await this.loadState();
@@ -126,6 +127,7 @@ class StateStore {
           pending--;
           if (pending === 0) {
             resolve();
+            this.ready.value = true;
           }
         };
         request.onerror = () => {
