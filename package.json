@@ -1,6 +1,7 @@
 {
   "name": "pwa",
   "type": "module",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "build": "vite build",
     "serve": "NODE_ENV=development vite --mode=development",
