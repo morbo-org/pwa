@@ -1,20 +1,3 @@
-<!--
- Copyright (C) 2024 Pavel Sobolev
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU Affero General Public License as published
- by the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU Affero General Public License for more details.
-
- You should have received a copy of the GNU Affero General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
--->
-
 <script setup lang="ts">
 import { ref, useTemplateRef } from "vue";
 
@@ -75,22 +58,6 @@ async function logout() {
           <Button class="text" type="button" @click="modal?.close">Close</Button>
         </div>
       </form>
-      <p>Copyright (C) 2024 Pavel Sobolev</p>
-      <p>This program is free software: you can redistribute it and/or modify
-      it under the terms of the GNU Affero General Public License as published
-      by the Free Software Foundation, either version 3 of the License, or
-      (at your option) any later version.</p>
-      <p>This program is distributed in the hope that it will be useful,
-      but WITHOUT ANY WARRANTY; without even the implied warranty of
-      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-      <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a>
-      for more details.</p>
-      Source code is available at
-      <ul>
-        <li><a href="https://codeberg.org/morbo-org/Morbo">https://codeberg.org/morbo-org/Morbo</a></li>
-        <li><a href="https://github.com/morbo-org/Morbo">https://github.com/morbo-org/Morbo</a></li>
-        <li><a href="https://gitlab.com/morbo-org/Morbo">https://gitlab.com/morbo-org/Morbo</a></li>
-      </ul>
     </Modal>
   </Teleport>
 </template>
