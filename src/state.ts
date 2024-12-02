@@ -28,7 +28,6 @@ class Feeds {
 }
 
 class State {
-  apiUrl = ref("");
   username = ref("");
   isLoggedIn = ref(false);
 

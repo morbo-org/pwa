@@ -7,6 +7,7 @@ import Button from "@/components/buttons/Button.vue";
 
 import IconAdd from "@/components/icons/IconAdd.vue";
 
+import { API_URL } from "@/globals";
 import { state } from "@/state";
 
 const modalOpen = ref(false);
@@ -25,7 +26,7 @@ async function submit() {
 
   let response: Response;
   try {
-    response = await fetch(state.apiUrl.value + "/feed/", {
+    response = await fetch(API_URL + "/feed/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

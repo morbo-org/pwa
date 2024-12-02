@@ -7,6 +7,7 @@ import Button from "@/components/buttons/Button.vue";
 
 import IconSettings from "@/components/icons/IconSettings.vue";
 
+import { API_URL } from "@/globals";
 import { state } from "@/state";
 import { authStore } from "@/store";
 
@@ -23,7 +24,7 @@ async function logout() {
   const sessionToken = await authStore.getSessionToken();
 
   try {
-    await fetch(state.apiUrl.value + "/session/", {
+    await fetch(API_URL + "/session/", {
       method: "DELETE",
       headers: { Authorization: `Bearer ${sessionToken}` },
     });
@@ -49,10 +50,6 @@ async function logout() {
       <header>Settings</header>
       <form @submit.prevent="logout">
         <span>You're logged in as <em>{{ state.username.value }}</em>.</span>
-        <div class="form-input">
-          <label for="url">API URL:</label>
-          <input v-model="state.apiUrl.value" type="url" placeholder="https://api.morbo.paveloom.dev">
-        </div>
         <div class="form-actions">
           <Button class="text" type="submit">Log out</Button>
           <Button class="text" type="button" @click="modal?.close">Close</Button>
