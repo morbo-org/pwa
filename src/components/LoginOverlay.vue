@@ -53,6 +53,8 @@ async function submit() {
     if (!state.isLoggedIn.value) {
       errorMessage.value = "Login failed: no session token received.";
     }
+
+    password.value = "";
   } else {
     const message = await response.text();
     if (message) {
@@ -62,7 +64,6 @@ async function submit() {
     }
   }
 
-  password.value = "";
   isSubmitting.value = false;
 }
 
