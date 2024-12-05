@@ -9,6 +9,7 @@ import IconAdd from "@/components/icons/IconAdd.vue";
 
 import { API_URL } from "@/globals";
 import { state } from "@/state";
+import { authStore } from "@/store";
 
 const modalOpen = ref(false);
 const feedUrl = ref("");
@@ -24,11 +25,16 @@ async function submit() {
   isSubmitting.value = true;
   errorMessage.value = "";
 
+  const sessionToken = await authStore.getSessionToken();
+
   let response: Response;
   try {
     response = await fetch(API_URL + "/feed/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Authorization": `Bearer ${sessionToken}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         url: feedUrl.value,
       }),
