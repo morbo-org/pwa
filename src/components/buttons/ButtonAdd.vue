@@ -7,7 +7,6 @@ import Button from "@/components/buttons/Button.vue";
 
 import IconAdd from "@/components/icons/IconAdd.vue";
 
-import { API_URL } from "@/globals";
 import { state } from "@/state";
 import { authStore } from "@/store";
 
@@ -29,7 +28,7 @@ async function submit() {
 
   let response: Response;
   try {
-    response = await fetch(API_URL + "/feed/", {
+    response = await fetch(state.apiURL.value + "/feed/", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${sessionToken}`,

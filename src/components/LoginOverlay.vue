@@ -5,7 +5,6 @@ import Overlay from "@/components/Overlay.vue";
 
 import Button from "@/components/buttons/Button.vue";
 
-import { API_URL } from "@/globals";
 import { state } from "@/state";
 import { authStore, stateStore } from "@/store";
 
@@ -22,7 +21,7 @@ async function submit() {
 
   let response: Response;
   try {
-    response = await fetch(API_URL + "/session/", {
+    response = await fetch(state.apiURL.value + "/session/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -78,6 +77,10 @@ onMounted(() => {
     <Overlay v-else>
       <header>Log In</header>
       <form @submit.prevent="submit">
+        <div class="form-input">
+          <label for="api-url">API URL:</label>
+          <input id="api-url" v-model="state.apiURL.value" type="url" required>
+        </div>
         <div class="form-input">
           <label for="username">Username:</label>
           <input id="username" v-model="state.username.value" type="text" required>

@@ -1,5 +1,7 @@
 import { ref, shallowReactive } from "vue";
 
+import { API_URL } from "./globals";
+
 type FeedItemType = "directory" | "feed";
 
 export class Feed {
@@ -28,6 +30,8 @@ class Feeds {
 }
 
 class State {
+  apiURL = ref(API_URL);
+
   username = ref("");
   isLoggedIn = ref(false);
 

@@ -24,7 +24,7 @@ async function logout() {
   const sessionToken = await authStore.getSessionToken();
 
   try {
-    await fetch(API_URL + "/session/", {
+    await fetch(state.apiURL.value + "/session/", {
       method: "DELETE",
       headers: { Authorization: `Bearer ${sessionToken}` },
     });
@@ -50,6 +50,10 @@ async function logout() {
       <header>Settings</header>
       <form @submit.prevent="logout">
         <span>You're logged in as <em>{{ state.username.value }}</em>.</span>
+        <div class="form-input">
+          <label for="api-url">API URL:</label>
+          <input id="api-url" v-model="state.apiURL.value" type="url" :placeholder="API_URL">
+        </div>
         <div class="form-actions">
           <Button class="text" type="submit">Log out</Button>
           <Button class="text" type="button" @click="modal?.close">Close</Button>
