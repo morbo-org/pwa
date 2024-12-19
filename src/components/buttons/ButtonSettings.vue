@@ -12,27 +12,21 @@ import { state } from "@/state";
 import { authStore } from "@/store";
 
 const isSubmitting = ref(false);
-const errorMessage = ref("");
 
 const modal = useTemplateRef<InstanceType<typeof Modal>>("modal");
 
 async function logout() {
   if (isSubmitting.value) return;
   isSubmitting.value = true;
-  errorMessage.value = "";
 
   const sessionToken = await authStore.getSessionToken();
 
-  try {
-    await fetch(state.apiURL.value + "/session/", {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${sessionToken}` },
-    });
-  } catch {
-    errorMessage.value = "Log out failed: failed to reach the endpoint.";
-    isSubmitting.value = false;
-    return;
-  }
+  void fetch(state.apiURL.value + "/session/", {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${sessionToken}` },
+  }).catch(() => {
+    // Delete the session token even if the request fails.
+  });
 
   await authStore.deleteSessionToken();
   await authStore.checkLoginStatus();
@@ -55,7 +49,7 @@ async function logout() {
           <input id="api-url" v-model="state.apiURL.value" type="url" :placeholder="API_URL">
         </div>
         <div class="form-actions">
-          <Button class="text" type="submit">Log out</Button>
+          <Button class="text" type="submit" :disabled="isSubmitting">Log out</Button>
           <Button class="text" type="button" @click="modal?.close">Close</Button>
         </div>
       </form>
